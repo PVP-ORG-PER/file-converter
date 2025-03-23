@@ -1,88 +1,97 @@
-# Markdown to PDF API
+# API de Conversión
 
-Markdown to PDF API is a simple and efficient API that allows users to convert Markdown files into PDF documents. This project is designed to streamline the process of generating PDFs from Markdown content, making it ideal for developers and teams who need automated document generation.
+Esta API REST fue desarrollada con **NestJS** y permite convertir documentos entre los formatos soportados: **docx, pdf, md** y **html**. La aplicación está diseñada de forma modular, utilizando patrones de diseño (como Strategy y Composite) para separar la lógica de conversión, y ofrece documentación interactiva mediante Swagger.
 
-## Features
+## Tabla de Contenidos
 
-- Convert Markdown files to PDF format.
-- Support for Markdown syntax, including headings, lists, tables, and more.
-- Easy-to-use API endpoints.
-- Lightweight and fast.
+- [Características](#características)
+- [Tecnologías](#tecnologías)
+- [Instalación](#instalación)
+- [Uso](#uso)
+- [Variables de Entorno](#variables-de-entorno)
+- [Licencia](#licencia)
 
-## How It Works
+## Características
 
-1. The API accepts a Markdown file or raw Markdown content as input.
-2. It processes the Markdown content and converts it into a PDF document.
-3. The generated PDF is returned as a downloadable file.
+- **Conversión de archivos:** Convierte documentos entre los formatos docx, pdf, md y html.
+- **Arquitectura modular:** Separación clara de controladores, servicios y estrategias de conversión.
+- **Patrones de diseño:** Se utilizan los patrones Strategy y Composite Strategy para gestionar conversiones.
+- **Logging y manejo de errores:** Registro de actividad y errores con el logger integrado de NestJS.
+- **Documentación OpenAPI:** Documentación interactiva generada con Swagger.
+- **Configuración centralizada:** Variables de entorno para definir formatos soportados y parámetros de Swagger.
 
-## Installation
+## Tecnologías
 
-Follow these steps to download and install the project:
+- **[NestJS](https://nestjs.com/):** Framework de Node.js para construir aplicaciones escalables y mantenibles.
+- **TypeScript:** Superset tipado de JavaScript que mejora la calidad y mantenibilidad del código.
+- **@nestjs/config:** Módulo para gestionar configuraciones y variables de entorno.
+- **@nestjs/swagger:** Genera documentación OpenAPI/Swagger automáticamente.
+- **md-to-pdf:** Librería para convertir Markdown a PDF.
+- **marked:** Para convertir Markdown a HTML.
+- **mammoth:** Para convertir documentos DOCX a HTML.
+- **html-pdf:** Para convertir HTML a PDF.
+- **turndown:** Para convertir HTML a Markdown.
+- **Logger de NestJS:** Para registrar la actividad y facilitar la depuración.
 
-### Prerequisites
+## Instalación
 
-- Node.js (version 14 or higher)
-- npm (Node Package Manager)
+1. **Clonar el repositorio:**
 
-### Steps
-
-1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/markdown-to-pdf-api.git
+   git clone https://github.com/tuusuario/tu-repositorio.git
+   cd tu-repositorio
    ```
 
-2. Navigate to the project directory:
-   ```bash
-   cd markdown-to-pdf-api
-   ```
+2. **Instalar dependencias:**
 
-3. Install dependencies:
    ```bash
    npm install
    ```
 
-4. Start the server:
-   ```bash
-   npm start
+3. **Configurar variables de entorno:**
+
+   Crea un archivo `.env` en la raíz del proyecto con el siguiente contenido:
+
+   ```env
+   SUPPORTED_FORMATS=docx,pdf,md,html
+   SWAGGER_TITLE=API de Conversión
+   SWAGGER_DESCRIPTION=API para convertir documentos entre formatos (docx, pdf, md, html)
+   SWAGGER_VERSION=1.0.0
    ```
 
-5. The API will be available at `http://localhost:3000`.
+4. **Iniciar la aplicación:**
 
-## Usage
+   ```bash
+   npm run start
+   ```
 
-### API Endpoints
+   La API se ejecutará en `http://localhost:3000`.
 
-#### Convert Markdown to PDF
+## Uso
 
-- **Endpoint**: `POST /convert`
-- **Description**: Converts Markdown content to a PDF file.
-- **Request Body**:
-  ```json
-  {
-    "markdown": "# Your Markdown Content Here"
-  }
-  ```
-- **Response**: A downloadable PDF file.
+- **Documentación de la API:**
 
-### Example Request
+  Accede a la documentación interactiva en `http://localhost:3000/api` para ver todos los endpoints, parámetros y ejemplos.
 
-Use `curl` to send a request:
-```bash
-curl -X POST http://localhost:3000/convert \
--H "Content-Type: application/json" \
--d '{"markdown": "# Hello, World!"}' --output output.pdf
-```
+- **Endpoints principales:**
 
-This will save the generated PDF as `output.pdf`.
+  - **POST /convert:**
+    Convierte un archivo entre formatos.
+    **Parámetros:**
+    - `file`: Archivo a convertir (formato multipart/form-data).
+    - `from`: Formato de origen (por ejemplo, `md`).
+    - `to`: Formato de destino (por ejemplo, `pdf`).
 
-## Contributing
+  - **GET /formats:**
+    Devuelve un objeto JSON con la lista de formatos soportados.
 
-Contributions are welcome! Feel free to open issues or submit pull requests to improve the project.
+## Variables de Entorno
 
-## License
+- **SUPPORTED_FORMATS:** Lista de formatos soportados, separados por comas (por ejemplo, `docx,pdf,md,html`).
+- **SWAGGER_TITLE:** Título de la documentación Swagger.
+- **SWAGGER_DESCRIPTION:** Descripción de la API en la documentación Swagger.
+- **SWAGGER_VERSION:** Versión de la API.
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+## Licencia
 
-## Contact
-
-For questions or support, please contact [your-email@example.com].
+Este proyecto se distribuye bajo la Licencia MIT.
