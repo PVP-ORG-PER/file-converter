@@ -24,6 +24,6 @@ async function bootstrap() {
   await app.listen(port);
   const logger = new Logger('Bootstrap');
   logger.log(`Server is running on port ${port}`);
-  console.log('Documentaion is available at /swagger');
+  console.log('Documentation is available at /swagger');
 }
 bootstrap();

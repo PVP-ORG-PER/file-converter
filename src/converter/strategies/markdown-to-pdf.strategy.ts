@@ -6,12 +6,12 @@ export class MarkdownToPDFStrategy implements IConversionStrategy {
   async convert(input: Buffer): Promise<Buffer> {
     const markdownText = input.toString('utf-8');
     const result = (await mdToPdf({ content: markdownText }, {})) as any;
-    if (!result || !result.pdf) {
+    if (!result || !result.content) {
       throw new HttpException(
         'Conversion failed',
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
-    return result.pdf;
+    return Buffer.from(result.content);
   }
 }
